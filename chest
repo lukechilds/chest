@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# Display Usage
+usage() {
+  echo "Usage: chest -e [folder|file]"
+  echo "       chest -d [key]"
+  echo ""
+  echo "  -h       Help. Display this message and quit."
+  echo "  -e       Encrypt data and send to chest."
+  echo "  -d       Decrypt data from chest."
+  echo "  -z       Compress data before sending to chest."
+  echo "  -r       Remove original data after sending to chest."
+  echo "  -l       List items in chest."
+  echo "  -k [key] Set custom key."
+  exit
+}
+if [ -z "$1" ]
+then
+  usage
+fi
+
+# Set defaults
+encrypt=false
+decrypt=false
+compress=false
+remove=false
+key=false
+
+# Parse options
+optspec="hedzrlk:"
+while getopts "$optspec" optchar
+do
+  case "${optchar}" in
+    h)
+      usage
+      ;;
+    e)
+      encrypt=true
+      ;;
+    d)
+      decrypt=true
+      ;;
+    z)
+      compress=true
+      ;;
+    r)
+      remove=true
+      ;;
+    l)
+      usage
+      ;;
+    k)
+      key=$OPTARG
+      ;;
+  esac
+done
+shift $(($OPTIND - 1))
+file=$1
