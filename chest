@@ -47,7 +47,7 @@ do
       remove=true
       ;;
     l)
-      usage
+      list_keys
       ;;
     k)
       key=$OPTARG
