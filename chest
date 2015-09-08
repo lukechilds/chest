@@ -95,22 +95,44 @@ list() {
     invalid_options
   fi
 
+  # Search
+  search=$item
+
   # Loop over all files in chest
   chest_dir="${HOME}/.chest/*"
-  for key in $chest_dir; do
+  for file in $chest_dir; do
 
     # Remove chest path
-    key=${key#$chest_dir}
+    file=${file#$chest_dir}
 
     # Remove chest extensions
+    key=false
     t=".tar.gpg"
     tgz=".tar.gz.gpg"
-    if [[ $key == *$t ]]
+    if [[ $file == *$t ]]
     then
-      echo ${key%$t}
-    elif [[ $key == *$tgz ]]
+      key=${file%$t}
+    elif [[ $file == *$tgz ]]
     then
-      echo ${key%$tgz}
+      key=${file%$tgz}
+    fi
+
+    # Check we've got a valid key
+    if [ "$key" != "false" ]
+    then
+
+      # Search keys
+      if [ "$search" != "" ]
+      then
+        if [[ $key == $search ]]
+        then
+          echo $key
+        fi
+
+      # Or show them all
+      else
+        echo $key
+      fi
     fi
 
   done
