@@ -86,6 +86,30 @@ encrypt() {
   fi
 }
 
+# List
+list() {
+
+  # Loop over all files in chest
+  chest_dir="${HOME}/.chest/*"
+  for key in $chest_dir; do
+
+    # Remove chest path
+    key=${key#$chest_dir}
+
+    # Remove chest extensions
+    t=".tar.gpg"
+    tgz=".tar.gz.gpg"
+    if [[ $key == *$t ]]
+    then
+      echo ${key%$t}
+    elif [[ $key == *$tgz ]]
+    then
+      echo ${key%$tgz}
+    fi
+
+  done
+}
+
 # Display usage if no args set
 if [ -z "$1" ]
 then
