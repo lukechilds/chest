@@ -68,7 +68,13 @@ then
   in_file=$item
 
   # Output file
-  out_file="${HOME}/.chest/${in_file}.tar"
+  if [ $key = false ]
+  then
+    out_file=$in_file
+  else
+    out_file=$key
+  fi
+  out_file="${HOME}/.chest/${out_file}.tar"
   if [ $compress = true ]
   then
     out_file="${out_file}.gz"
@@ -84,6 +90,6 @@ then
   args="${args}f"
 
   # Move to chest
-  tar $args - $in_file | gpg -c > $out_file
+  tar $args - "$in_file" | gpg -c > "$out_file"
 
 fi
