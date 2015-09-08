@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Create chest folder on first run
+mkdir -p ~/.chest
+
 # Display Usage
 usage() {
   echo "Usage: chest -e [folder|file]"
@@ -55,4 +58,32 @@ do
   esac
 done
 shift $(($OPTIND - 1))
-file=$1
+item=$1
+
+# Encrypt
+if [ $encrypt = true ]
+then
+
+  # Input file
+  in_file=$item
+
+  # Output file
+  out_file="${HOME}/.chest/${in_file}.tar"
+  if [ $compress = true ]
+  then
+    out_file="${out_file}.gz"
+  fi
+  out_file="${out_file}.gpg"
+
+  # Setup tar args
+  args=cv
+  if [ $compress = true ]
+  then
+    args="${args}z"
+  fi
+  args="${args}f"
+
+  # Move to chest
+  tar $args - $in_file | gpg -c > $out_file
+
+fi
