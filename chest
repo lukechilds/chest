@@ -3,7 +3,7 @@
 # Create chest folder on first run
 mkdir -p ~/.chest
 
-# Display Usage
+# Usage
 usage() {
   echo "Usage: chest -e [folder|file]"
   echo "       chest -d [key]"
@@ -17,6 +17,8 @@ usage() {
   echo "  -k [key] Set custom key."
   exit
 }
+
+# Display usage if no args set
 if [ -z "$1" ]
 then
   usage
