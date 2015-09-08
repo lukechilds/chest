@@ -17,20 +17,20 @@ usage() {
   echo "  -k [key] Set custom key."
 }
 
+# Invalid options
+invalid_options() {
+  echo "Error invalid option combination"
+  usage
+  exit 1
+}
+
 # Encrypt
 encrypt() {
 
   # Check conflicting options
-  if [ $decrypt = true ]
+  if [ $decrypt = true ] || [ $list = true ]
   then
-    echo "Error cannot use option d and e together"
-    usage
-    exit 1
-  elif [ $list = true ]
-  then
-    echo "Error cannot use option l and e together"
-    usage
-    exit 1
+    invalid_options
   fi
 
   # Input file
@@ -88,6 +88,12 @@ encrypt() {
 
 # List
 list() {
+
+  # Check conflicting options
+  if [ $encrypt = true ] || [ $decrypt = true ] || [ $compress = true ] || [ $remove = true ] || [ $key = true ]
+  then
+    invalid_options
+  fi
 
   # Loop over all files in chest
   chest_dir="${HOME}/.chest/*"
