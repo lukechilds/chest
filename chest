@@ -17,59 +17,18 @@ usage() {
   echo "  -k [key] Set custom key."
 }
 
-# Display usage if no args set
-if [ -z "$1" ]
-then
-  usage
-  exit 1
-fi
-
-# Set defaults
-encrypt=false
-decrypt=false
-compress=false
-remove=false
-key=false
-
-# Parse options
-optspec="hedzrlk:"
-while getopts "$optspec" optchar
-do
-  case "${optchar}" in
-    h)
-      usage
-      ;;
-    e)
-      encrypt=true
-      ;;
-    d)
-      decrypt=true
-      ;;
-    z)
-      compress=true
-      ;;
-    r)
-      remove=true
-      ;;
-    l)
-      list_keys
-      ;;
-    k)
-      key=$OPTARG
-      ;;
-  esac
-done
-shift $(($OPTIND - 1))
-item=$1
-
 # Encrypt
-if [ $encrypt = true ]
-then
+encrypt() {
 
   # Check conflicting options
   if [ $decrypt = true ]
   then
     echo "Error cannot use option d and e together"
+    usage
+    exit 1
+  elif [ $list = true ]
+  then
+    echo "Error cannot use option l and e together"
     usage
     exit 1
   fi
@@ -125,5 +84,62 @@ then
   then
     rm -r "$in_file"
   fi
+}
 
+# Display usage if no args set
+if [ -z "$1" ]
+then
+  usage
+  exit 1
+fi
+
+# Set defaults
+encrypt=false
+decrypt=false
+compress=false
+remove=false
+list=false
+key=false
+
+# Parse options
+optspec="hedzrlk:"
+while getopts "$optspec" optchar
+do
+  case "${optchar}" in
+    h)
+      usage
+      ;;
+    e)
+      encrypt=true
+      ;;
+    d)
+      decrypt=true
+      ;;
+    z)
+      compress=true
+      ;;
+    r)
+      remove=true
+      ;;
+    l)
+      list=true
+      ;;
+    k)
+      key=$OPTARG
+      ;;
+  esac
+done
+shift $(($OPTIND - 1))
+item=$1
+
+# Encrypt
+if [ $encrypt = true ]
+then
+  encrypt
+elif [ $decrypt = true ]
+then
+  decrypt
+elif [ $list = true ]
+then
+  list
 fi
