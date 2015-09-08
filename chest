@@ -99,8 +99,19 @@ then
   fi
   args="${args}f"
 
+  # Password
+  echo "Password:"
+  read -s password
+  echo "Repeat password:"
+  read -s password_conf
+  if [ $password != $password_conf ]
+  then
+    echo "Error passwords don't match"
+    exit 1
+  fi
+
   # Move to chest
-  tar $args - "$in_file" | gpg -c > "$out_file"
+  tar $args - "$in_file" | gpg --batch --passphrase "$password" -c > "$out_file"
 
   # Send error exit code if tar/gpg fail
   if [ "${PIPESTATUS[0]}${PIPESTATUS[1]}" != "00" ]
