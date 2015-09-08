@@ -11,7 +11,7 @@ usage() {
   echo "  -h       Help. Display this message and quit."
   echo "  -e       Encrypt data and send to chest."
   echo "  -d       Decrypt data from chest."
-  echo "  -z       Compress data before sending to chest."
+  echo "  -z       Compress (zip) data before sending to chest."
   echo "  -r       Remove original data after sending to chest."
   echo "  -l       List items in chest."
   echo "  -k [key] Set custom key."
@@ -44,7 +44,7 @@ encrypt() {
     out_file=$key
   fi
   out_file="${HOME}/.chest/${out_file}.tar"
-  if [ $compress = true ]
+  if [ $zip = true ]
   then
     out_file="${out_file}.gz"
   fi
@@ -52,7 +52,7 @@ encrypt() {
 
   # Setup tar args
   args=cv
-  if [ $compress = true ]
+  if [ $zip = true ]
   then
     args="${args}z"
   fi
@@ -90,7 +90,7 @@ encrypt() {
 list() {
 
   # Check conflicting options
-  if [ $encrypt = true ] || [ $decrypt = true ] || [ $compress = true ] || [ $remove = true ] || [ $key = true ]
+  if [ $encrypt = true ] || [ $decrypt = true ] || [ $zip = true ] || [ $remove = true ] || [ $key = true ]
   then
     invalid_options
   fi
@@ -126,7 +126,7 @@ fi
 # Set defaults
 encrypt=false
 decrypt=false
-compress=false
+zip=false
 remove=false
 list=false
 key=false
@@ -146,7 +146,7 @@ do
       decrypt=true
       ;;
     z)
-      compress=true
+      zip=true
       ;;
     r)
       remove=true
