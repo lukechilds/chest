@@ -92,4 +92,16 @@ then
   # Move to chest
   tar $args - "$in_file" | gpg -c > "$out_file"
 
+  # Send error exit code if tar/gpg fail
+  if [ "${PIPESTATUS[0]}${PIPESTATUS[1]}" != "00" ]
+  then
+    exit 1
+  fi
+
+  # Remove original
+  if [ $remove = true ]
+  then
+    rm -r "$in_file"
+  fi
+
 fi
