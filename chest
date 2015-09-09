@@ -85,7 +85,7 @@ encrypt() {
   # Send error exit code if tar/gpg fail
   if [ "${PIPESTATUS[0]}${PIPESTATUS[1]}" != "00" ]
   then
-    echo "Error couldnt move data to chest"
+    echo "Error couldn't move data to chest"
     exit 1
   fi
 
