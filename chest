@@ -80,6 +80,8 @@ encrypt() {
   fi
 
   # Move to chest
+  echo ""
+  echo "Moving data to chest"
   tar $args - "$in_file" | gpg --batch --passphrase "$password" -c > "$out_file"
 
   # Send error exit code if tar/gpg fail
