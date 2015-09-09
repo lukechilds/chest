@@ -24,8 +24,18 @@ invalid_options() {
   exit 1
 }
 
+# Check GPG
+check_gpg() {
+  command -v gpg >/dev/null 2>&1 || {
+    echo "Error chest requires gpg to be installed"; exit 1;
+  }
+}
+
 # Encrypt
 encrypt() {
+
+  # Check GPG
+  check_gpg
 
   # Check conflicting options
   if [ $decrypt = true ] || [ $list = true ]
