@@ -102,7 +102,7 @@ encrypt() {
 list() {
 
   # Check conflicting options
-  if [ $encrypt = true ] || [ $decrypt = true ] || [ $zip = true ] || [ $remove = true ] || [ $key = true ]
+  if [ $encrypt = true ] || [ $decrypt = true ] || [ $zip = true ] || [ $remove = true ] || [ $key != false ]
   then
     invalid_options
   fi
