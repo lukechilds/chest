@@ -98,6 +98,48 @@ encrypt() {
   fi
 }
 
+# Decrypt
+decrypt() {
+
+  # Check GPG
+  check_gpg
+
+  # Check conflicting options
+  if [ $encrypt = true ] || [ $zip = true ] || [ $remove = true ] || [ $list = true ] || [ $key != false ]
+  then
+    invalid_options
+  fi
+
+  # Key
+  key=$item
+
+  # Get filepath
+  chest_dir="${HOME}/.chest"
+  t=".tar.gpg"
+  tgz=".tar.gz.gpg"
+  if [ -e "$chest_dir/$key$t" ]
+  then
+    file_path="$chest_dir/$key$t"
+  else
+    if [ -e "$chest_dir/$key$tgz" ]
+    then
+      file_path="$chest_dir/$key$tgz"
+    fi
+  fi
+
+  # Setup tar args
+  args=-xv
+  if [[ $file == *$tgz ]]
+  then
+    args="${args}z"
+  fi
+  args="${args}f"
+
+  # Retrieve from chest to current dir
+  gpg -d "$file_path" | tar $args -
+
+}
+
 # List
 list() {
 
