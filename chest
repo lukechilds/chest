@@ -61,7 +61,7 @@ encrypt() {
   out_file="${out_file}.gpg"
 
   # Setup tar args
-  args=cv
+  args=-cv
   if [ $zip = true ]
   then
     args="${args}z"
