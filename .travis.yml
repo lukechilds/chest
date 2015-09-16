@@ -1,0 +1,6 @@
+language: bash
+before_script:
+    - wget https://raw.github.com/tlevine/urchin/master/urchin
+    - chmod +x urchin
+script:
+    - ./urchin tests
