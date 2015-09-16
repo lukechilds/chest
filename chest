@@ -14,7 +14,7 @@ usage() {
   echo "  -z       Compress (zip) data before sending to chest."
   echo "  -r       Remove original data after sending to chest."
   echo "  -l       List items in chest."
-  echo "  -k [key] Set custom key."
+  echo "  -k [key] Set key to save/retrieve."
 }
 
 # Invalid options
