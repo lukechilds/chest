@@ -1,0 +1,4 @@
+#!/bin/bash
+../chest
+chest_dir="${HOME}/.chest"
+[ -d "$chest_dir" ]
