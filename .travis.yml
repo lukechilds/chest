@@ -1,6 +1,6 @@
 language: bash
-before_script:
-    - wget https://raw.github.com/tlevine/urchin/master/urchin
-    - chmod +x urchin
-script:
-    - ./urchin tests
+before_script: git clone https://github.com/sstephenson/bats.git
+script: bats/bin/bats tests
+notifications:
+  email:
+    on_success: never
