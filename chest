@@ -8,13 +8,14 @@ usage() {
   echo "Usage: chest -e [folder|file]"
   echo "       chest -d [key]"
   echo ""
-  echo "  -h       Help. Display this message and quit."
-  echo "  -e       Encrypt data and send to chest."
-  echo "  -d       Decrypt data from chest."
-  echo "  -z       Compress (zip) data before sending to chest."
-  echo "  -r       Remove original data after sending to chest."
-  echo "  -l       List items in chest."
-  echo "  -k [key] Set key to save/retrieve."
+  echo "  -h            Help. Display this message and quit."
+  echo "  -e            Encrypt data and send to chest."
+  echo "  -d            Decrypt data from chest."
+  echo "  -z            Compress (zip) data before sending to chest."
+  echo "  -r            Remove original data after sending to chest."
+  echo "  -l            List items in chest."
+  echo "  -k [key]      Set key to save/retrieve."
+  echo "  -p [password] Set password. (omit to be prompted)"
 }
 
 # Invalid options
@@ -69,14 +70,17 @@ encrypt() {
   args="${args}f"
 
   # Password
-  echo "Password:"
-  read -s password
-  echo "Repeat password:"
-  read -s password_conf
-  if [ $password != $password_conf ]
+  if [ "$password" = "false" ]
   then
-    echo "Error passwords don't match"
-    exit 1
+    echo "Password:"
+    read -s password
+    echo "Repeat password:"
+    read -s password_conf
+    if [ $password != $password_conf ]
+    then
+      echo "Error passwords don't match"
+      exit 1
+    fi
   fi
 
   # Move to chest
@@ -135,8 +139,15 @@ decrypt() {
   fi
   args="${args}f"
 
+  # Password
+  if [ "$password" = "false" ]
+  then
+    echo "Password:"
+    read -s password
+  fi
+
   # Retrieve from chest to current dir
-  gpg -d "$file_path" | tar $args -
+  gpg -d --passphrase "$password" "$file_path" | tar $args -
 
 }
 
@@ -206,9 +217,10 @@ zip=false
 remove=false
 list=false
 key=false
+password=false
 
 # Parse options
-optspec="hedzrlk:"
+optspec="hedzrlk:p:"
 while getopts "$optspec" optchar
 do
   case "${optchar}" in
@@ -232,6 +244,9 @@ do
       ;;
     k)
       key=$OPTARG
+      ;;
+    p)
+      password=$OPTARG
       ;;
   esac
 done
