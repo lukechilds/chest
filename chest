@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euxo pipefail
+set -euo pipefail
 
 # Create chest folder on first run
 mkdir -p ~/.chest
@@ -205,7 +205,7 @@ list() {
 }
 
 # Display usage if no args set
-if [ -z "$1" ]
+if [ -z "${1:-}" ]
 then
   usage
   exit 1
@@ -252,7 +252,7 @@ do
   esac
 done
 shift $(($OPTIND - 1))
-item=$1
+item="${1:-}"
 
 # Encrypt
 if [ $encrypt = true ]
