@@ -78,24 +78,6 @@ Defaults to `true`.
 export CHEST_CLEAR_PASSWORD_CACHE="true"
 ```
 
-## Installation
-
-### macOS
-
-```shell
-brew install lukechilds/tap/chest
-```
-
-### Linux
-
-Just clone this repo and either copy/symlink `chest` to your PATH or run the script directly with `./chest`. Requires `gpg` to be installed.
-
-### Windows
-
-```
-¯\_(ツ)_/¯
-```
-
 ## Tips
 
 ### Cloud Backup/Sync
@@ -117,6 +99,24 @@ export CHEST_DIR="$HOME/Dropbox/chest"
 Now your encrypted files will be safely replicated around the world on Dropbox's servers to prevent against data loss.
 
 You can also do this across multiple machines to keep your Chest in sync between them.
+
+## Installation
+
+### macOS
+
+```shell
+brew install lukechilds/tap/chest
+```
+
+### Linux
+
+Just clone this repo and either copy/symlink `chest` to your PATH or run the script directly with `./chest`. Requires `gpg` to be installed.
+
+### Windows
+
+```
+¯\_(ツ)_/¯
+```
 
 ## License
 
