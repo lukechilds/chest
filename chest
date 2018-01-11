@@ -148,7 +148,7 @@ decrypt() {
   fi
 
   # Retrieve from chest to current dir
-  gpg -d --passphrase "$password" "$file_path" | tar $args -
+  gpg --batch -d --passphrase "$password" "$file_path" | tar $args -
 
 }
 
