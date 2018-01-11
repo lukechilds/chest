@@ -123,6 +123,22 @@ load helper_functions
 
 }
 
+@test "-k Sets a custom key" {
+
+  # Generate random folder name
+  folder="test-folder-$(random_string 8)"
+
+  # Create dummy folder and files
+  create_dummy_folders "$folder"
+
+  # Send to chest
+  ./chest -e -k "thisisakey" -p "password" "$folder"
+
+  # Check it's there
+  ./chest -l | grep "thisisakey"
+
+}
+
 @test "Directories with children can be added/retrieved form the chest" {
 
   # Generate random folder name
