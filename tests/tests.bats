@@ -34,3 +34,25 @@ load helper_functions
   ./chest -l | grep "$folder"
 
 }
+
+@test "Retrieve a folder from the chest" {
+
+  # Generate random folder name
+  folder="test-folder-$(random_string 8)"
+
+  # Create dummy folder and files
+  create_dummy_folders "$folder"
+
+  # Send to chest
+  ./chest -ep "password" "$folder"
+
+  # Check it's there
+  ./chest -l | grep "$folder"
+
+  # Retrieve it
+  ./chest -dp "password" "$folder"
+
+  # Check it's there
+  ls | grep "$folder"
+
+}
