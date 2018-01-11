@@ -1,1 +1,1 @@
-CHEST_DIR="tests/.chest"
+export CHEST_DIR="tests/.chest"
