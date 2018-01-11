@@ -1,6 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 
+# This is needed for gpg to take over the TTY
+# https://github.com/keybase/keybase-issues/issues/1712#issuecomment-141226705
+export GPG_TTY=$(tty)
+
 # Default options
 [[ -z "${CHEST_DIR:-}" ]] && export CHEST_DIR="$HOME/.chest"
 [[ -z "${CLEAR_PASSWORD_CACHE:-}" ]] && export CLEAR_PASSWORD_CACHE="true"
