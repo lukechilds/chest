@@ -7,7 +7,7 @@ export GPG_TTY=$(tty)
 
 # Default options
 [[ -z "${CHEST_DIR:-}" ]] && export CHEST_DIR="$HOME/.chest"
-[[ -z "${CLEAR_PASSWORD_CACHE:-}" ]] && export CLEAR_PASSWORD_CACHE="true"
+[[ -z "${CHEST_CLEAR_PASSWORD_CACHE:-}" ]] && export CHEST_CLEAR_PASSWORD_CACHE="true"
 
 # Create chest folder on first run
 mkdir -p "$CHEST_DIR"
@@ -100,7 +100,7 @@ encrypt() {
   fi
 
   # Clear gpg password cache
-  if [ "$CLEAR_PASSWORD_CACHE" = "true" ]
+  if [ "$CHEST_CLEAR_PASSWORD_CACHE" = "true" ]
   then
     gpgconf --reload gpg-agent
   fi
@@ -159,7 +159,7 @@ decrypt() {
   gpg -d $password_args "$file_path" | tar $args -
 
   # Clear gpg password cache
-  if [ "$CLEAR_PASSWORD_CACHE" = "true" ]
+  if [ "$CHEST_CLEAR_PASSWORD_CACHE" = "true" ]
   then
     gpgconf --reload gpg-agent
   fi
