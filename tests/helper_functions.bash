@@ -10,7 +10,10 @@ create_dummy_folders() {
   touch "$folder/bar"
 }
 
-teardown() {
-  # Remove any leftover temp folders
+remove_dummy_folders() {
   rm -rf test-folder-*
+}
+
+teardown() {
+  remove_dummy_folders
 }

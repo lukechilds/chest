@@ -50,7 +50,7 @@ load helper_functions
   ./chest -l | grep "$folder"
 
   # Retrieve it
-  teardown
+  remove_dummy_folders
   ./chest -dp "password" "$folder"
 
   # Check it's there
@@ -73,7 +73,7 @@ load helper_functions
   ./chest -l | grep "$folder"
 
   # Retrieve it
-  teardown
+  remove_dummy_folders
   ./chest -dp "password" "$folder"
 
   # Check it's there
@@ -154,7 +154,7 @@ load helper_functions
   ./chest -l | grep "$folder"
 
   # Retrieve it
-  teardown
+  remove_dummy_folders
   ./chest -dp "password" "$folder"
 
   # Check it's there
