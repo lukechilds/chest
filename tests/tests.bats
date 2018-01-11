@@ -50,6 +50,7 @@ load helper_functions
   ./chest -l | grep "$folder"
 
   # Retrieve it
+  teardown
   ./chest -dp "password" "$folder"
 
   # Check it's there
