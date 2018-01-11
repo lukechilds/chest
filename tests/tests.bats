@@ -19,7 +19,7 @@ load helper_functions
   [[ "${lines[0]}" = "Usage"* ]]
 }
 
-@test "-e Encrypts a file and sends it to the chest" {
+@test "Option -e encrypts a file and sends it to the chest" {
 
   # Generate random folder name
   folder="test-folder-$(random_string 8)"
@@ -35,7 +35,7 @@ load helper_functions
 
 }
 
-@test "-d decrypts a file from the chest" {
+@test "Option -d decrypts a file from the chest" {
 
   # Generate random folder name
   folder="test-folder-$(random_string 8)"
@@ -58,7 +58,7 @@ load helper_functions
 
 }
 
-@test "-z Compresses data before/after sending to chest" {
+@test "Option -z compresses data before/after sending to chest" {
 
   # Generate random folder name
   folder="test-folder-$(random_string 8)"
@@ -81,7 +81,7 @@ load helper_functions
 
 }
 
-@test "-r Removes the original file after sending to the chest" {
+@test "Option -r removes the original file after sending to the chest" {
 
   # Generate random folder name
   folder="test-folder-$(random_string 8)"
@@ -100,7 +100,7 @@ load helper_functions
 
 }
 
-@test "-l Lists items in chest" {
+@test "Option -l lists items in chest" {
 
   # Clear all items from chest
   rm -rf $CHEST_DIR
@@ -123,7 +123,7 @@ load helper_functions
 
 }
 
-@test "-k Sets a custom key" {
+@test "Option -k sets a custom key" {
 
   # Generate random folder name
   folder="test-folder-$(random_string 8)"
