@@ -16,7 +16,7 @@ load helper_functions
   run ./chest
   [[ "$status" -eq 1 ]]
   echo "${lines[0]}"
-  [[ "${lines[0]}" = "Usage"* ]]
+  [[ "${lines[0]}" = "chest"* ]]
 }
 
 @test "Option -e encrypts a file and sends it to the chest" {
