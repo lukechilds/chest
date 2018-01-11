@@ -2,9 +2,38 @@
 
 > Bash glue to encrypt and hide files
 
-Chest allows you to encrypt any file/folder and move it to a hidden directory on your machine. You can then retrieve it from the chest into the current working director at any point in the future.
+Chest allows you to encrypt any file/folder and move it to a hidden directory on your machine. When needed you can retrieve it from the chest into the current working directory.
 
 Chest makes use of password based AES256 encryption with a strong key derivation function provided by `gpg` to make sure your data is secure.
+
+Your chest can easily by synced between machines via any third party cloud storage providers such as Dropbox or Google Drive etc.
+
+## Why
+
+I wanted something that was:
+
+- Highly secure to store stuff like Bitcoin private keys
+- Easily accessible from the CLI (quickly encrypt/decrypt)
+- Can handle directories or files
+- Sync-able between machines
+- usable interactively or scriptable
+- Password based (keys are in my brain, not on my machine)
+- Keeps me completely in control of my data
+- Allows me to choose whether to store locally or replicate to the cloud/VPS etc
+- Simple and easy to understand source code
+- No crazy dependencies
+
+Chest ticks all those boxes. It's under 300 lines of fairly simple Bash, and about 90% of that are just CLI helper methods. The core encryption logic is easily understandable and is only a handful of lines.
+
+It's basically a shell script wrapper around `tar | gpg` so you don't have to hand type commands like:
+
+```shell
+# Encrypt secret-folder
+tar -cvzf - "secret-folder" | gpg -c --cipher-algo AES256 > "secret-folder.tar.gz.gpg"
+
+# Decrypt secret-folder
+gpg -d "secret-folder.tar.gz.gpg" | tar -xvzf -
+```
 
 ## Usage
 
