@@ -96,6 +96,26 @@ Just clone this repo and either copy/symlink `chest` to your PATH or run the scr
 ¯\_(ツ)_/¯
 ```
 
+## Tips
+
+### Cloud Storage
+
+As long as you're using strong passwords, it's safe to replicate your Chest to the cloud. Everything will be encrypted before it leaves your machine and the keys are safely stored in your brain.
+
+For example to set this up with Dropbox, you could either:
+
+```shell
+ln -s ~/.chest ~/Dropbox/chest
+```
+
+or
+
+```shell
+export CHEST_DIR="$HOME/Dropbox/chest"
+```
+
+Now your encrypted files are safely replicated around the world on Dropbox's servers to prevent against data loss. You can also do this across multiple machines to keep your Chest in sync.
+
 ## License
 
 MIT © Luke Childs
