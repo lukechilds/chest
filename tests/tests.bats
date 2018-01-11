@@ -100,6 +100,29 @@ load helper_functions
 
 }
 
+@test "-l Lists items in chest" {
+
+  # Clear all items from chest
+  rm -rf $CHEST_DIR
+
+  # Generate random folder names
+  folder1="test-folder-$(random_string 8)"
+  folder2="test-folder-$(random_string 8)"
+
+  # Create dummy folders and files
+  create_dummy_folders "$folder1"
+  create_dummy_folders "$folder2"
+
+  # Send to chest
+  ./chest -erp "password" "$folder1"
+  ./chest -erp "password" "$folder2"
+
+  # Check they're there
+  ./chest -l | grep "$folder1"
+  ./chest -l | grep "$folder2"
+
+}
+
 @test "Directories with children can be added/retrieved form the chest" {
 
   # Generate random folder name
