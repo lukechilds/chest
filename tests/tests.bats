@@ -81,6 +81,25 @@ load helper_functions
 
 }
 
+@test "-r Removes the original file after sending to the chest" {
+
+  # Generate random folder name
+  folder="test-folder-$(random_string 8)"
+
+  # Create dummy folder and files
+  create_dummy_folders "$folder"
+
+  # Send to chest
+  ./chest -erp "password" "$folder"
+
+  # Check it's there
+  ./chest -l | grep "$folder"
+
+  # Check the original file is removed
+  ! ls | grep "$folder"
+
+}
+
 @test "Directories with children can be added/retrieved form the chest" {
 
   # Generate random folder name
