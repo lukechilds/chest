@@ -1,0 +1,12 @@
+#!/bin/bash
+set -euo pipefail
+
+# Pull down bats
+if [ ! -d "tests/bats" ] ; then
+    echo "Pulling down bats for tests..."
+    git clone --quiet https://github.com/sstephenson/bats.git tests/bats
+fi
+
+# Run tests
+echo "Running tests..."
+tests/bats/bin/bats tests
