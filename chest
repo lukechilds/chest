@@ -1,8 +1,11 @@
 #!/bin/bash
 set -euo pipefail
 
-# Create chest folder on first run
+# Default options
 [[ -z "${CHEST_DIR:-}" ]] && export CHEST_DIR="$HOME/.chest"
+[[ -z "${CLEAR_PASSWORD_CACHE:-}" ]] && export CLEAR_PASSWORD_CACHE="true"
+
+# Create chest folder on first run
 mkdir -p "$CHEST_DIR"
 
 # Usage
@@ -92,6 +95,12 @@ encrypt() {
     exit 1
   fi
 
+  # Clear gpg password cache
+  if [ "$CLEAR_PASSWORD_CACHE" = "true" ]
+  then
+    gpgconf --reload gpg-agent
+  fi
+
   # Remove original
   if [ $remove = true ]
   then
@@ -144,6 +153,12 @@ decrypt() {
 
   # Retrieve from chest to current dir
   gpg -d $password_args "$file_path" | tar $args -
+
+  # Clear gpg password cache
+  if [ "$CLEAR_PASSWORD_CACHE" = "true" ]
+  then
+    gpgconf --reload gpg-agent
+  fi
 
 }
 
