@@ -1,1 +1,1 @@
-chest_dir="${HOME}/.chest"
+export CHEST_DIR="tests/.chest"
