@@ -19,7 +19,7 @@ load helper_functions
   [[ "${lines[0]}" = "Usage"* ]]
 }
 
-@test "Send a folder to the chest" {
+@test "Send a file to the chest" {
 
   # Generate random folder name
   folder="test-folder-$(random_string 8)"
@@ -55,6 +55,30 @@ load helper_functions
 
   # Check it's there
   ls | grep "$folder"
+
+}
+
+@test "Send a directory to chest" {
+
+  # Generate random folder name
+  folder="test-folder-$(random_string 8)"
+
+  # Create dummy folder and files
+  create_dummy_folders "$folder"
+
+  # Send to chest
+  ./chest -ep "password" "$folder"
+
+  # Check it's there
+  ./chest -l | grep "$folder"
+
+  # Retrieve it
+  teardown
+  ./chest -dp "password" "$folder"
+
+  # Check it's there
+  ls "$folder" | grep foo
+  ls "$folder" | grep bar
 
 }
 
