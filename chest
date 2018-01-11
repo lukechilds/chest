@@ -134,7 +134,7 @@ decrypt() {
 
   # Setup tar args
   args=-xv
-  if [[ $file == *$tgz ]]
+  if [[ $file_path == *$tgz ]]
   then
     args="${args}z"
   fi
