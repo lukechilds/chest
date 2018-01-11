@@ -54,6 +54,30 @@ Usage: chest -e [folder|file]
   -p [password] Set password. (omit to be prompted)
 ```
 
+## Options
+
+### `CHEST_DIR`
+
+The directory all of your encrypted data will be stored in.
+
+Defaults to `~/.chest`.
+
+```shell
+export CHEST_DIR="$HOME/.chest"
+```
+
+### `CHEST_CLEAR_PASSWORD_CACHE`
+
+By default, `gpg` will cache passwords for as long as the `gpg` agent is running. This means you don't need to keep re-entering the same password to decrypt the same file. This is useful for certain use cases but for storing highly sensitive data is probably not what you want. By default we reload the `gpg` agent each time you enter a password to ensure they aren't cached.
+
+You can diable this by setting `CHEST_CLEAR_PASSWORD_CACHE` to `false`.
+
+Defaults to `true`.
+
+```shell
+export CHEST_CLEAR_PASSWORD_CACHE="true"
+```
+
 ## Installation
 
 ### macOS
