@@ -1,1 +1,1 @@
-CHEST_DIR="/tmp/.chest"
+CHEST_DIR="tests/.chest"
