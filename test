@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Pull down bats
 if [ ! -d "tests/bats" ] ; then
-    echo "Pulling down bats for tests..."
+    echo "Pulling down github.com/sstephenson/bats test framework..."
     git clone --quiet https://github.com/sstephenson/bats.git tests/bats
 fi
 
