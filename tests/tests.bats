@@ -9,7 +9,7 @@ load helper_functions
 
 @test "Check chest dir gets created" {
   run ./chest
-  [[ -d "$chest_dir" ]]
+  [[ -d "$CHEST_DIR" ]]
 }
 
 @test "Running with no commands should return usage with error status" {

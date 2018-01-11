@@ -2,7 +2,8 @@
 set -euo pipefail
 
 # Create chest folder on first run
-mkdir -p ~/.chest
+[[ -z "${CHEST_DIR:-}" ]] && export CHEST_DIR="$HOME/.chest"
+mkdir -p "$CHEST_DIR"
 
 # Usage
 usage() {
@@ -55,7 +56,7 @@ encrypt() {
   else
     out_file=$key
   fi
-  out_file="${HOME}/.chest/${out_file}.tar"
+  out_file="$CHEST_DIR/${out_file}.tar"
   if [ $zip = true ]
   then
     out_file="${out_file}.gz"
@@ -119,16 +120,15 @@ decrypt() {
   key=$item
 
   # Get filepath
-  chest_dir="${HOME}/.chest"
   t=".tar.gpg"
   tgz=".tar.gz.gpg"
-  if [ -e "$chest_dir/$key$t" ]
+  if [ -e "$CHEST_DIR/$key$t" ]
   then
-    file_path="$chest_dir/$key$t"
+    file_path="$CHEST_DIR/$key$t"
   else
-    if [ -e "$chest_dir/$key$tgz" ]
+    if [ -e "$CHEST_DIR/$key$tgz" ]
     then
-      file_path="$chest_dir/$key$tgz"
+      file_path="$CHEST_DIR/$key$tgz"
     fi
   fi
 
@@ -165,11 +165,11 @@ list() {
   search=$item
 
   # Loop over all files in chest
-  chest_dir="${HOME}/.chest/*"
-  for file in $chest_dir; do
+  chest_files="$CHEST_DIR/*"
+  for file in $chest_files; do
 
     # Remove chest path
-    file=${file#$chest_dir}
+    file=${file#$chest_files}
 
     # Remove chest extensions
     key=false

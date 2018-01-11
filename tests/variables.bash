@@ -1,1 +1,1 @@
-chest_dir="${HOME}/.chest"
+CHEST_DIR="/tmp/.chest"
