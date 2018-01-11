@@ -73,24 +73,17 @@ encrypt() {
   fi
   args="${args}f"
 
-  # Password
-  if [ "$password" = "false" ]
+  # Scriptable passwords
+  password_args=""
+  if [ "$prompt_password" = "false" ]
   then
-    echo "Password:"
-    read -s password
-    echo "Repeat password:"
-    read -s password_conf
-    if [ $password != $password_conf ]
-    then
-      echo "Error passwords don't match"
-      exit 1
-    fi
+    password_args="--batch --passphrase $password"
   fi
 
   # Move to chest
   echo ""
   echo "Moving data to chest"
-  tar $args - "$in_file" | gpg --batch -c --cipher-algo AES256 --passphrase "$password"  > "$out_file"
+  tar $args - "$in_file" | gpg -c --cipher-algo AES256 $password_args > "$out_file"
 
   # Send error exit code if tar/gpg fail
   if [ "${PIPESTATUS[0]}${PIPESTATUS[1]}" != "00" ]
@@ -142,15 +135,15 @@ decrypt() {
   fi
   args="${args}f"
 
-  # Password
-  if [ "$password" = "false" ]
+  # Scriptable passwords
+  password_args=""
+  if [ "$prompt_password" = "false" ]
   then
-    echo "Password:"
-    read -s password
+    password_args="--batch --passphrase $password"
   fi
 
   # Retrieve from chest to current dir
-  gpg --batch -d --passphrase "$password" "$file_path" | tar $args -
+  gpg -d $password_args "$file_path" | tar $args -
 
 }
 
@@ -220,7 +213,7 @@ zip=false
 remove=false
 list=false
 key=false
-password=false
+prompt_password=true
 
 # Parse options
 optspec="hedzrlk:p:"
@@ -249,6 +242,7 @@ do
       key=$OPTARG
       ;;
     p)
+      prompt_password=false
       password=$OPTARG
       ;;
   esac
