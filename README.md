@@ -20,7 +20,7 @@ I wanted something that was:
 - Easily accessible from the CLI (quickly encrypt/decrypt)
 - Can handle directories or files
 - Sync-able between machines
-- usable interactively or scriptable
+- Usable interactively or scriptable
 - Password based (keys are in my brain, not on my machine)
 - Keeps me completely in control of my data
 - Allows me to choose whether to store locally or replicate to the cloud/VPS etc
