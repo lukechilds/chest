@@ -12,7 +12,7 @@
   "stdout": [
     [
       0,
-      "\r\u001b[0m\u001b[27m\u001b[24m\u001b[J\r\n\u001b[35mdemo\u001b[39m \u001b[34m%\u001b[39m \r\n\u001b[1m\u001b[31m›\u001b[39m\u001b[33m›\u001b[39m\u001b[32m›\u001b[39m\u001b[0m \u001b[K\u001b[?2004h"
+      "\r\u001b[0m\u001b[27m\u001b[24m\u001b[J\r\u001b[35mdemo\u001b[39m \u001b[34m%\u001b[39m \r\n\u001b[1m\u001b[31m›\u001b[39m\u001b[33m›\u001b[39m\u001b[32m›\u001b[39m\u001b[0m \u001b[K\u001b[?2004h"
     ],
     [
       0.764672,
