@@ -43,7 +43,7 @@ gpg -d "secret-folder.tar.gz.gpg" | tar -xvzf -
 
 ```
 $ chest -h
-chest 0.2.0
+chest 0.4.0
 
 Usage: chest -e [folder|file]
        chest -d [key]
