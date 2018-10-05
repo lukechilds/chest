@@ -139,7 +139,7 @@ load helper_functions
 
 }
 
-@test "Directories with children can be added/retrieved form the chest" {
+@test "Directories with children can be added/retrieved from the chest" {
 
   # Generate random folder name
   folder="test-folder-$(random_string 8)"
