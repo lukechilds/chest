@@ -9,7 +9,7 @@ Chest makes use of password based AES256 encryption with a strong key derivation
 Your chest can easily by synced between machines via any third party cloud storage providers such as Dropbox or Google Drive etc.
 
 <p align="center">
-	<img src="https://rawgit.com/lukechilds/chest/master/demo/terminal.svg" width="720">
+	<img src="demo/terminal.svg" width="720">
 </p>
 
 ## Why
