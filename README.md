@@ -88,6 +88,8 @@ export CHEST_CLEAR_PASSWORD_CACHE="true"
 
 As long as you're using strong passwords, it's safe to replicate your Chest to the cloud. Everything will be encrypted before it leaves your machine and the keys are safely stored in your brain.
 
+**To re-iterate, you must use a sufficiently random password for cloud backup to be safe. If you don't fully understand this, do not replicate your chest to third-party cloud providers.**
+
 For example to set this up with Dropbox, you could either do:
 
 ```shell
