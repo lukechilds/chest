@@ -93,7 +93,7 @@ As long as you're using strong passwords, it's safe to replicate your Chest to t
 For example to set this up with Dropbox, you could either do:
 
 ```shell
-ln -s ~/.chest ~/Dropbox/chest
+ln -s ~/Dropbox/chest ~/.chest
 ```
 
 or
