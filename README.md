@@ -120,9 +120,7 @@ Just clone this repo and either copy/symlink `chest` to your PATH or run the scr
 
 ### Windows
 
-```
-¯\_(ツ)_/¯
-```
+One way is to utilize the [Linux subsystem for Windows](https://docs.microsoft.com/en-us/windows/wsl/install-win10#manual-installation-steps) and then simply follow the Linux instructions above.
 
 ## License
 
